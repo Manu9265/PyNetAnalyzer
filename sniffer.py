@@ -1,5 +1,7 @@
 from collections import Counter
+from scapy.arch.windows import get_windows_if_list
 import scapy.all as scapy
+
 
 
 
@@ -20,7 +22,8 @@ def analyse_packets(packets):
 
 if __name__ == "__main__" :
     
-    print(scapy.get_if_list())
+    for iface in get_windows_if_list():
+        print(iface["description"])  
     
     interface_name = input("network adapter to use : ")
     p = scapy.sniff(count=10, iface=interface_name, prn=print_info)
